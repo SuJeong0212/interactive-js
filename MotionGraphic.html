@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>모션그래픽에 적용해보는 패럴럭스 스크롤 인터렉션</title>
+    <script src="./jquery.1.12.4.js"></script>
+</head>
+<style>
+    *{
+        margin:0;
+        padding:0;
+    }
+    ul,li,ol{
+        list-style: none;
+    }
+    header{
+        position: fixed;
+        top: 0;
+        bottom:0;
+    }
+    .nav_list{
+        position:fixed;
+        top: 50%;
+        left:20px;
+        transform: translateY(-50%);
+        z-index: 100;
+    }
+    .nav_list ul li{
+        padding:20px 0;
+    }
+    .nav_list button{
+        cursor: pointer;
+        border:none;
+        background-color:transparent;
+        font-size: 100px;
+        color:#fff;
+    }
+    .logo{
+        font-size: 30px;
+        color:#fff;
+    }
+    .section1,.section2,.section3{
+        height:100vh;
+        overflow: hidden;
+    }
+    .section1 .sec01_video{
+        position: fixed;
+    left: 0;
+    top: 0;
+    z-index: -1;
+    width: 100%;
+    height: 100%;
+    }
+    .sec01_video video{
+        position:absolute;
+    min-width: 1920px;
+    height: 100vh;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    }
+</style>
+<body>
+    <div class="wrap">
+        <header>
+            <p class="logo">Motion Graphic</p>
+        </header>
+        <nav class="nav_list">
+            <ul>
+                <li>
+                    <button>Top</button>
+                </li>
+                <li>
+                    <button>Mi</button>
+                </li>
+                <li>
+                    <button>PL</button>
+                </li>
+            </ul>
+        </nav>
+        <section class="section1">
+            <article class="sec01">
+                <h2>신입 웹 퍼블리셔 김수정 입니다!</h2>
+                <div class="sec01_video">
+                    <video width="100%" autoplay loop muted>
+                        <source src="./assets/video/sky.mp4" type="video/mp4">
+                    </video>
+                </div>
+            </article>
+        </section>
+        <section class="section2">
+            <article class="sec02">
+                <h2>해당요소가 엑티브되면서 등장하는 리스트 이미지</h2>
+                <ul>
+                    <li class="sec02_imgbox1">
+                        <div>
+                            <img src="./assets/images/img_list02.jpg" alt="">
+                        </div>
+                    </li>
+                    <li class="sec02_imgbox2">
+                        <div>
+                            <img src="./assets/images/img_list01.jpg" alt="">
+                        </div>
+                    </li>
+                    <li class="sec02_imgbox3">
+                        <div>
+                            <img src="./assets/images/img_list03.jpg" alt="">
+                        </div>
+                    </li>
+                </ul>
+            </article>
+        </section>
+        <section class="section3">
+            <article class="sec03">
+                <h2>PARALLAX SCROLLING</h2>
+                <div class="sec03_imgbox img1">
+                    <img src="./assets/images/mson1.jpg" alt="">
+                </div>
+                <div class="sec03_imgbox img2">
+                    <img src="./assets/images/mson2.jpg" alt="">
+                </div>
+                <div class="sec03_imgbox img3">
+                    <img src="./assets/images/mson3.jpg" alt="">
+                </div>
+                <div class="sec03_imgbox img4">
+                    <img src="./assets/images/mson4.jpg" alt="">
+                </div>
+                <div class="sec03_imgbox img5">
+                    <img src="./assets/images/mson5.jpg" alt="">
+                </div>
+                <div class="sec03_imgbox img6">
+                    <img src="./assets/images/img_list01.jpg" alt="">
+                </div>
+                <div class="sec03_imgbox img7">
+                    <img src="./assets/images/img_list02.jpg" alt="">
+                </div>
+                <div class="sec03_imgbox img8">
+                    <img src="./assets/images/img_list03.jpg" alt="">
+                </div>
+            </article>
+        </section>
+        <footer>
+            <p>봐주셔서 감사합니다 :)</p>
+        </footer>
+    </div>
+</body>
+</html>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="jquery.1.12.4.js"></script>
+    <script src="./assets/js/InfiniteScroll.js"></script>
+    <title>Test</title>
+</head>
+<style>
+    *{
+        margin: 0;
+        padding: 0;
+    }
+    .com_tit{
+        margin:100px 0 80px;
+        font-size: 70px;
+        text-align: center;
+    }
+    .sc_infinity .list:after{
+        clear:both;
+        display: block;
+        content: '';
+    }
+    .sc_infinity .list li{
+        float: left;
+        width:25%;
+    }
+    .sc_infinity .list li figure{
+        padding:10px;
+    }
+    .sc_infinity .list li figure img{
+        width: 100%;
+    }
+    .footer{height: 200px; background-color: #ddd;}
+</style>
+<body>
+    <div class="wrap">
+        <section class="sec01">
+            <h2 class="com_tit">Infinite Scroll</h2>
+            <article class="sc_infinity">
+                <ul class="list">
+                    <li>
+                        <figure>
+                            <img src="./assets/images/1.jpg">
+                        </figure>
+                    </li>
+                    <li>
+                        <figure>
+                            <img src="./assets/images/2.jpg">
+                        </figure>
+                    </li>
+                    <li>
+                        <figure>
+                            <img src="./assets/images/3.jpg">
+                        </figure>
+                    </li>
+                    <li>
+                        <figure>
+                            <img src="./assets/images/1.jpg">
+                        </figure>
+                    </li>
+                    <li>
+                        <figure>
+                            <img src="./assets/images/2.jpg">
+                        </figure>
+                    </li>
+                    <li>
+                        <figure>
+                            <img src="./assets/images/3.jpg">
+                        </figure>
+                    </li>
+                </ul>
+            </article>
+            <div class="footer"></div>
+        </section>
+    </div>
+</body>
+</html>
