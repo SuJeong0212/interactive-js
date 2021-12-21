@@ -5,10 +5,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>모션그래픽에 적용해보는 패럴럭스 스크롤 인터렉션</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&family=Roboto:wght@700&display=swap" rel="stylesheet">
     <script src="./jquery.1.12.4.js"></script>
 </head>
 <style>
     *{
+        font-family: 'Noto Sans KR', sans-serif;
+font-family: 'Roboto', sans-serif;
         margin:0;
         padding:0;
     }
@@ -17,8 +22,11 @@
     }
     header{
         position: fixed;
-        top: 0;
-        bottom:0;
+    top: 10px;
+    left: 10px;
+    border-bottom: 1px solid #fff;
+    width: calc(100% - 20px);
+    z-index: 100;
     }
     .nav_list{
         position:fixed;
@@ -45,6 +53,11 @@
         height:100vh;
         overflow: hidden;
     }
+    .section2{
+        background-image: url('./assets/images/img_blur01.jpg');
+        padding-top:25vh;
+        height:100vh;
+    }
     .section1 .sec01_video{
         position: fixed;
     left: 0;
@@ -61,6 +74,105 @@
     left: 50%;
     transform: translate(-50%,-50%);
     }
+    .sec01>h2{
+        position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #fff;
+    font-size: 40px;
+    font-weight: 400;
+    letter-spacing: -2px;
+    }
+    .sec02{
+        margin: 0 auto;
+    width: 800px;
+    text-align: center;
+    }
+    .sec02 ul{
+        position:relative;
+        padding-top: 40px;
+        left:30px;
+    }
+    .sec02 ul li{
+        position:absolute;
+        width:50%;
+    }
+    .sec02 ul li:nth-child(2){
+        left:420px;
+        top:156px;
+    }
+    .sec02 ul li:last-child{
+        top:308px;
+    }
+    .sec02 ul li div img{
+        width:100%;
+    }
+    .section3{
+        background-color:#333;
+    }
+    .sec03{
+        position:relative;
+        width:800px;
+        margin:-50px auto;
+    }
+    .section3 h2{
+        font-size: 40px;
+    color: #fff;
+    text-align: center;
+    margin-top: 50px;
+    }
+    .sec03_imgbox{
+        position:absolute;
+    }
+    .sec03_imgbox img{
+        width:100%;
+    }
+    .sec03_imgbox.img1{
+        top:200px;
+        left:20px;
+        width:250px;
+    }
+    .sec03_imgbox.img2{
+        top:180px;
+        left:290px;
+        width:300px;
+    }
+    .sec03_imgbox.img3{
+        top:190px;
+        left:610px;
+        width:260px;
+    }
+    .sec03_imgbox.img4{
+        top:380px;
+        left:-20px;
+        width:200px;
+    }
+    .sec03_imgbox.img5{
+        top:400px;
+        left:460px;
+        width:280px;
+    }
+    .sec03_imgbox.img6{
+        top:400px;
+        left:200px;
+        width:240px;
+    }
+    .sec03_imgbox.img7{
+        top:380px;
+        right:-160px;
+        width:200px;
+    }
+    footer{
+        height:300px;
+        background-color: rgba(3, 3, 3, 0.5);
+    }
+    footer p {
+        font-size: 40px;
+    color: #fff;
+    text-align: center;
+    padding-top: 70px;
+}
 </style>
 <body>
     <div class="wrap">
@@ -113,31 +225,30 @@
             </article>
         </section>
         <section class="section3">
+            <h2>PARALLAX SCROLLING</h2>
             <article class="sec03">
-                <h2>PARALLAX SCROLLING</h2>
-                <div class="sec03_imgbox img1">
-                    <img src="./assets/images/mson1.jpg" alt="">
-                </div>
-                <div class="sec03_imgbox img2">
-                    <img src="./assets/images/mson2.jpg" alt="">
-                </div>
-                <div class="sec03_imgbox img3">
-                    <img src="./assets/images/mson3.jpg" alt="">
-                </div>
-                <div class="sec03_imgbox img4">
-                    <img src="./assets/images/mson4.jpg" alt="">
-                </div>
-                <div class="sec03_imgbox img5">
-                    <img src="./assets/images/mson5.jpg" alt="">
-                </div>
-                <div class="sec03_imgbox img6">
-                    <img src="./assets/images/img_list01.jpg" alt="">
-                </div>
-                <div class="sec03_imgbox img7">
-                    <img src="./assets/images/img_list02.jpg" alt="">
-                </div>
-                <div class="sec03_imgbox img8">
-                    <img src="./assets/images/img_list03.jpg" alt="">
+                <div class="imgbox">
+                    <div class="sec03_imgbox img1">
+                        <img src="./assets/images/mson1.jpg" alt="">
+                    </div>
+                    <div class="sec03_imgbox img2">
+                        <img src="./assets/images/mson2.jpg" alt="">
+                    </div>
+                    <div class="sec03_imgbox img3">
+                        <img src="./assets/images/mson3.jpg" alt="">
+                    </div>
+                    <div class="sec03_imgbox img4">
+                        <img src="./assets/images/mson4.jpg" alt="">
+                    </div>
+                    <div class="sec03_imgbox img5">
+                        <img src="./assets/images/mson5.jpg" alt="">
+                    </div>
+                    <div class="sec03_imgbox img6">
+                        <img src="./assets/images/img_list01.jpg" alt="">
+                    </div>
+                    <div class="sec03_imgbox img7">
+                        <img src="./assets/images/img_list02.jpg" alt="">
+                    </div>
                 </div>
             </article>
         </section>
