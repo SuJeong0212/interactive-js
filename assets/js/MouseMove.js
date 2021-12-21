@@ -1,12 +1,29 @@
+let cursor_item;
+let h1;
+let x = 0;
+let y = 0;
+let mx = 0;
+let my = 0;
+let speed = 0.05;
+
 window.onload = function(){
-    let h1 = document.getElementsByTagName("h1")[0];
-    let cursor_item = document.getElementsByClassName("cursor_item")[0];
+    h1 = document.getElementsByTagName("h1")[0];
+    cursor_item = document.getElementsByClassName("cursor_item")[0];
     window.addEventListener("mousemove",mouseFunc,false);
 
 function mouseFunc(e){
-    h1.innerHTML = " x: " + e.clientX + " y: " + e.clientY;
-    cursor_item.style.transform = "translate(" +e.clientX +"px," + e.clientY +"px)";
-
-    // console.log(e.clientX);
+    x = e.clientX;
+    y = e.clientY;
 }
+
+loop();
+};
+
+function loop(){
+    mx += (x - mx) * speed;
+    my += (y - my) * speed;
+    
+    h1.innerHTML = " x: " + x + " y: " + y;
+    cursor_item.style.transform = "translate(" + mx +"px," + my +"px)";
+    window.requestAnimationFrame(loop);
 }
