@@ -9,21 +9,21 @@ let speed = 0.05;
 window.onload = function(){
     h1 = document.getElementsByTagName("h1")[0];
     cursor_item = document.getElementsByClassName("cursor_item")[0];
-    window.addEventListener("mousemove",mouseFunc,false);
+    window.addEventListener("click",mouseFunc,false);
 
 function mouseFunc(e){
     x = e.clientX;
     y = e.clientY;
+        cursor_item.style.transform = "translate(" + x +"px," + y +"px)";
 }
 
-loop();
+// loop();
 };
 
-function loop(){
-    mx += (x - mx) * speed;
-    my += (y - my) * speed;
+// function loop(){
+//     mx += (x - mx) * speed;
+//     my += (y - my) * speed;
     
-    h1.innerHTML = " x: " + x + " y: " + y;
-    cursor_item.style.transform = "translate(" + mx +"px," + my +"px)";
-    window.requestAnimationFrame(loop);
-}
+//     h1.innerHTML = " x: " + x + " y: " + y;
+//     window.requestAnimationFrame(loop);
+// }
