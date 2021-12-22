@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="./assets/js/FixNothing.js"></script>
+    <title>FixNothing 사이트 페러렉스 구현</title>
+</head>
+<style>
+    body{
+        overflow: hidden;
+        margin:0;
+        padding:0;
+        position:relative;
+    }
+    .human{
+        position:absolute;
+        top:13%;
+        left:calc(50% - 150px);
+        width:300px;
+        z-index: 100;
+    }
+    .txtbox{
+    width: 60%;
+    position: absolute;
+    z-index: 50;
+    top: 10%;
+    left: 50%;
+    transform: translate(-50%, 0);
+        transform-style: preserve-3d;
+        perspective: 300px;
+    }
+    .txtbox img{
+        width:100%; 
+    }
+    .bg{
+        margin-bottom: 50px;
+        width:140%;
+        height:140vh;
+    }
+    .pipe{
+        position: absolute;
+    top: 640px;
+    left: -260px;
+    z-index: 110;
+    }
+</style>
+<body>
+    <img src="./assets/images/layer-7.png" class="human" alt="">
+    <div class="txtbox">
+        <img src="./assets/images/masthead-logo.svg" class="text3d" alt="">
+    </div>
+    <img src="./assets/images/layer-1.jpg" class="bg" alt="">
+    <img src="./assets/images/layer-9.png" class="pipe" alt="">
+</body>
+</html>
