@@ -14,11 +14,21 @@ window.onload = function(){
         var value = input.value;
 
         if(value == randomNum){
-            result.innerHTML = resultArr[2];
+            result.innerHTML = resultArr[2]; 
+            
+            setTimeout(function(){
+                resetFunc();
+            },1000)
         }else if(value > randomNum){
             result.innerHTML = resultArr[1];
         }else{
             result.innerHTML = resultArr[0];
         }
+    }
+
+    function resetFunc(){
+        input.value = 1;
+        result.innerHTML = "한판 더!"
+        randomNum = Math.round(Math.random() * 10)
     }
 }
