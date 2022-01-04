@@ -1,0 +1,47 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>더하기</title>
+    <script src="./assets/js/Timer.js"></script>
+    <style>
+      body {
+        height: 100vh;
+      }
+      .contWrap {
+        position: relative;
+        padding : 20px;
+        top: 40%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+      }
+      input {
+        padding : 10px 20px;
+        font-size : 20px;
+        text-align: center;
+        max-width: 170px;
+      }
+      button {
+        font-size : 20px;
+        padding : 8px 20px;
+      }
+    </style>
+    </head>
+    <body>
+      <div class="contWrap">
+        <button type="button" class="startBtn">더하기 시작</button>
+        <h1 class="num">0</h1>
+      </div>
+
+      <div class="contWrap">
+        <h3>연봉을 입력해보세요(만)</h3>
+        <input type="number" value="5000">
+        <button type="button" class="okBtn">확인</button>
+
+        <p class="sec">당신은 1초에 얼마를 벌고 있을까요?</p>
+      </div>
+    </body>
+</html>
