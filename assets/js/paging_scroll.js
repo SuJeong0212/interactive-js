@@ -3,9 +3,10 @@
 //     var nextBtn = document.querySelector(".nextBtn");
 //     var h1 = document.getElementsByTagName("h1")[0];
 //     var bgColorArr = ["#85FFBD", "#FFFB7D", "#E0C3FC", "#00DBDE"];
+//     var section = document.getElementsByTagName("section");
 
-//     var totlaNum = bgColorArr.length;
-//     var pageNum = Math.round(Math.random() * (totlaNum - 1));
+//     var pageNum = 0;
+//     var totlaNum = section.length;
 
 //     prevBtn.addEventListener("click", function(){
 //         if(pageNum > 0){
@@ -26,9 +27,15 @@
 //     })
     
 //     function bgColorChange(){
-//         h1.innerHTML = pageNum + " 페이지 입니다.";
+//         h1.innerHTML = (pageNum + 1) + " 페이지 입니다.";
 //         document.getElementsByTagName("body")[0].style.background = bgColorArr[pageNum];
+
+//         window.scrollTo({
+//             top:section[pageNum].offsetTop,
+//             behavior:'smooth',
+//         })
 //     }
+
 
 //     bgColorChange();
 // }
