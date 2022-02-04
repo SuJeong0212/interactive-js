@@ -37,6 +37,7 @@ body{
     justify-content: space-between;
 }
 .todo_input{
+    font-size: 16px;
     border-radius: 5px;
     background-color: #eee;
     border:none;
@@ -45,7 +46,7 @@ body{
 }
 
 .todo_submit_button{
-    width:70px;
+    width:80px;
     border-radius: 5px;
     background-color:#98c1f7;
     border:none;
@@ -62,7 +63,7 @@ body{
 }
 
 .todos{
-    margin-top: 106px;
+    margin-top: 125px;
     margin-bottom: 25px;
     overflow: auto;
 }
@@ -116,10 +117,13 @@ body{
     color:#555555;
     font-size: 14px;
     border-radius: 8px;
+    border:none;
+    cursor: pointer;
 }
 
 .item_buttons > button.todo_edit_button{
     background-color: #bad4f5;
+    margin-right: 5px;
 }
 
 .item_buttons > button.todo_recommend_button.active{
