@@ -125,6 +125,10 @@ body{
     background-color: #bad4f5;
     margin-right: 5px;
 }
+.todo_edit_confirm_button{
+    background-color: #bad4f5;
+    margin-right: 5px;
+}
 
 .item_buttons > button.todo_recommend_button.active{
     background-color: rgb(255, 238, 85);
@@ -161,4 +165,7 @@ body{
     bottom: 25px;
     transform: translateX(-50%);
     display: flex;
+}
+i{
+    pointer-events: none;
 }

@@ -13,14 +13,16 @@
     const createTodoElement = (item) => {
         const {
             id,
-            content
+            content,
+            completed
         } = item
         const $todoItem = document.createElement('div')
+        const isChecked = completed ? 'checked' : ''
         $todoItem.classList.add('item')
         $todoItem.dataset.id = id
         $todoItem.innerHTML = `
         <div class="content">
-            <input type="checkbox" class="todo_checkbox">
+            <input type="checkbox" class="todo_checkbox" ${isChecked}>
             <label>${content}</label>
             <input type="text" value="${content}">
         </div>
@@ -71,7 +73,76 @@
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify(todo),
-        })
+        }).then(getTodos).then(() => {
+            $todoInput.value = ''
+            $todoInput.focus()
+        }).catch((error) => console.error(error))
+    }
+
+    const toggleTodo = (e) =>{
+        if(e.target.className !== 'todo_checkbox') return
+        const $item = e.target.closest('.item')
+        const id = $item.dataset.id
+        const completed = e.target.checked
+
+        fetch(`${API_URL}/${id}`,{
+            method:'PATCH', //부분적으로 변경할떄는 patch, 전체적으로 변경할때는 put
+            headers:{
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({completed}),
+        }).then(getTodos).catch((error) => console.error(error))
+    }
+
+    const changeEditMode = (e) =>{
+        const $item = e.target.closest('.item')
+        const $label = $item.querySelector('label')
+        const $editInput = $item.querySelector('input[type="text"]')
+        const $contentButtons = $item.querySelector('.content_buttons')
+        const $editButtons = $item.querySelector('.edit_buttons')
+        const value = $editInput.value
+
+        if(e.target.className === 'todo_edit_button'){
+            $label.style.display = 'none'
+            $editInput.style.display = 'block'
+            $contentButtons.style.display = 'none'
+            $editButtons.style.display = 'block'
+            $editInput.focus()
+            $editInput.value = ''
+            $editInput.value = value //커서가 맨앞으로 가게되는데 value를 변수로 만들어서 값을 없앳다가 다시 나타나게해서 커서를 맨뒤로 보냄
+        }
+
+        if(e.target.className === 'todo_edit_cancel_button'){
+            $label.style.display = 'block'
+            $editInput.style.display = 'none'
+            $contentButtons.style.display = 'block'
+            $editButtons.style.display = 'none'
+            $editInput.value = $label.innerText
+        }
+    }
+
+    const editTodo = (e) =>{
+        if(e.target.className !== 'todo_edit_confirm_button') return
+        const $item = e.target.closest('.item')
+        const id = $item.dataset.id
+        const $editInput = $item.querySelector('input[type="text"]')
+        const content = $editInput.value
+
+        fetch(`${API_URL}/${id}`,{
+            method: 'PATCH',
+            headers:{
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({content}),
+        }).then(getTodos).catch((error) => console.error(error))
+    }
+
+    const removeTodo = (e) =>{
+        if(e.target.className !== 'todo_remove_button') return
+        const $item = e.target.closest('.item')
+        const id = $item.dataset.id
+
+        fetch(`${API_URL}/${id}`,{method: 'DELETE'}).then(getTodos).catch((error) => console.error(error))
     }
 
     const init = () => {
@@ -80,6 +151,10 @@
         })
 
         $form.addEventListener('submit',addTodo)
+        $todos.addEventListener('click',toggleTodo)
+        $todos.addEventListener('click',changeEditMode) //문구 수정 버튼 클릭시 버튼 바뀌기
+        $todos.addEventListener('click',editTodo) //문구 수정 후 확인버튼 누를때
+        $todos.addEventListener('click',removeTodo)
     }
     init()
 })()
