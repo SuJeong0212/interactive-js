@@ -1,4 +1,4 @@
-(function () {
+;(() => {
     'use strict'
 
     const get = (element) => document.querySelector(element)
@@ -11,10 +11,10 @@
         constructor(parent = 'body', data = {}) {
             this.parent = get(parent)
             this.canvas = document.createElement('canvas')
-            this.canvas.setAttribute('width', 480)
+            this.canvas.setAttribute('width', 480)  
             this.canvas.setAttribute('height', 340)
             this.ctx = this.canvas.getContext('2d')
-            this.fontFamily = "20px -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;"
+            this.fontFamily = "25px -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;"
             this.score = 0
             this.lives = data.lives
             this.speed = data.speed
@@ -24,7 +24,7 @@
             this.ballX = this.canvas.width / 2
             this.ballY = this.canvas.height - 30
             this.directX = data.speed
-            this.directY = data.speed
+            this.directY = -data.speed
             this.paddleWidth = data.paddleWidth
             this.paddleHeight = data.paddleHeight
             this.rightPressed = false
@@ -48,6 +48,7 @@
         }
 
         init = () => {
+            //벽돌 배열 만들기
             for (let colIndex = 0; colIndex < this.brickCol; colIndex++) {
                 this.bricks[colIndex] = []
                 for (let rowIndex = 0; rowIndex < this.brickRow; rowIndex++) {
@@ -153,12 +154,12 @@
         }
 
         draw = () => {
-            this.ctx.clearRect(0,0,this.canvas.width, this.canvas.height)
+            this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height)
 
             this.ctx.drawImage(
                 this.image,
                 this.canvas.width / 2 - this.image.width / 2,
-                this.canvas.height / 2 - this.image.height / 2,
+                this.canvas.height / 2 - this.image.height / 2
             )
 
             this.drawBall()
@@ -168,6 +169,18 @@
             this.drawLives()
             // this.detectCollision()
 
+            //공이 벽에 닿을 때 튕겨나가게 하기
+            if(this.ballX + this.directX > this.canvas.width - this.radius || this.ballX + this.directX < this.radius){
+                this.directX = -this.directX
+            }
+            if(this.ballY + this.directY < this.radius){
+                this.directY = -this.directY
+            }else if(this.ballY + this.directY > this.canvas.height - this.radius){
+                if(
+                    this.ballX > this.paddleX && this.ballX < this.paddleX + this.paddleWidth
+                ){this.directY = -this.directY}
+            }
+
             if(this.rightPressed && this.paddleX < this.canvas.width - this.paddleWidth) {
                 this.paddleX += 7
             }else if(this.leftPressed && 0 < this.paddleX){
@@ -175,7 +188,7 @@
             }
 
             this.ballX += this.directX
-            this.ballY -= this.directY
+            this.ballY += this.directY
 
             requestAnimationFrame(this.draw)
         }
