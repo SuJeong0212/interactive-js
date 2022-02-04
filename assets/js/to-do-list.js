@@ -5,10 +5,13 @@
         return document.querySelector(target)
     }
 
-    const API_URL = 'http://localhost:3000/todos'
     const $todos = get('.todos')
     const $form = get('.todo_form')
     const $todoInput = get('.todo_input')
+    const API_URL = 'http://localhost:3000/todos'
+
+    const limit = 5
+    let currentPage = 1
 
     const createTodoElement = (item) => {
         const {
@@ -55,7 +58,7 @@
     }
 
     const getTodos = () => {
-        fetch(API_URL)
+        fetch(`${API_URL}?_page=${currentPage}&_limit=${limit}`)
         .then((response) => response.json())
         .then((todos) => renderAllTodos(todos))
         .catch((error) => console.error(error))
