@@ -2,6 +2,11 @@
     'use strict'
 
     const get = (element) => document.querySelector(element)
+
+    const keyEvent = (control,func) => {
+        document.addEventListener(control, func, false)
+    }
+
     class BrickBreak {
         constructor(parent = 'body', data = {}) {
             this.parent = get(parent)
@@ -53,8 +58,38 @@
                     }
                 }
             }
-            //this.keyEvent()
+            this.keyEvent()
             this.draw()
+        }
+
+        keyupEvent = (event) =>{
+            if('Right' === event.key || 'ArrowRight' === event.key){
+                this.rightPressed = false
+            }else if('Left' === event.key || 'ArrowLeft' === event.key){
+                this.leftPressed = false
+            }
+        }
+
+        keydownEvent = (event) =>{
+            if('Right' === event.key || 'ArrowRight' === event.key){
+                this.rightPressed = true
+            }else if('Left' === event.key || 'ArrowLeft' === event.key){
+                this.leftPressed = true
+            }
+        }
+
+        mousemoveEvent = (event) =>{
+            const positionX = event.clientX - this.canvas.offsetLeft
+
+            if(0 < positionX && positionX < this.canvas.width){
+                this.paddleX = positionX - this.paddleWidth / 2
+            }
+        }
+
+        keyEvent = () =>{
+            keyEvent('keyup', this.keyupEvent)
+            keyEvent('keydown', this.keydownEvent)
+            keyEvent('mousemove', this.mousemoveEvent)
         }
 
         drawBall = () =>{
@@ -63,6 +98,58 @@
             this.ctx.arc(this.ballX, this.ballY, this.radius, 0, Math.PI * 2)
             this.ctx.fill()
             this.ctx.closePath()
+        }
+
+        drawPaddle = () =>{
+            this.ctx.beginPath()
+            this.ctx.rect(
+                this.paddleX,
+                this.canvas.height - this.paddleHeight,
+                this.paddleWidth,
+                this.paddleHeight
+            )
+            this.ctx.fillStyle = this.paddleColor
+            this.ctx.fill()
+            this.ctx.closePath()
+        }
+
+        drawBricks = () =>{
+            let brickX = 0
+            let brickY = 0
+            let gradient = this.ctx.createLinearGradient(0, 0, 200, 0)
+            gradient.addColorStop(0, this.brickStartColor)
+            gradient.addColorStop(1, this.brickEndColor)
+
+            for(let colIndex = 0; colIndex < this.brickCol; colIndex++){
+                for(let rowIndex = 0; rowIndex < this.brickRow; rowIndex++){
+                    if(1 !== this.bricks[colIndex] [rowIndex].status){
+                        continue
+                    }
+                    brickX =colIndex * (this.brickWidth + this.brickPad) + this.brickPosX
+                    brickY =rowIndex * (this.brickHeight + this.brickPad) + this.brickPosY
+
+                    this.bricks[colIndex] [rowIndex].x = brickX
+                    this.bricks[colIndex] [rowIndex].y = brickY
+
+                    this.ctx.beginPath()
+                    this.ctx.rect(brickX, brickY, this.brickWidth, this.brickHeight)
+                    this.ctx.fillStyle = gradient
+                    this.ctx.fill()
+                    this.ctx.closePath()
+                }
+            }
+        }
+
+        drawScore = () =>{
+            this.ctx.font = this.fontFamily
+            this.ctx.fillStyle = '#fff'
+            this.ctx.fillText('점수 : ' + this.score, 10, 25)
+        }
+
+        drawLives = () =>{
+            this.ctx.font = this.fontFamily
+            this.ctx.fillStyle = '#fff'
+            this.ctx.fillText('목숨 : ' + this.lives, this.canvas.width - 40, 25)
         }
 
         draw = () => {
@@ -75,15 +162,21 @@
             )
 
             this.drawBall()
-            // this.drawPaddle()
-            // this.drawBricks()
-            // this.drawScore()
-            // this.drawLines()
-            // this.drawLives()
+            this.drawPaddle()
+            this.drawBricks()
+            this.drawScore()
+            this.drawLives()
             // this.detectCollision()
+
+            if(this.rightPressed && this.paddleX < this.canvas.width - this.paddleWidth) {
+                this.paddleX += 7
+            }else if(this.leftPressed && 0 < this.paddleX){
+                this.paddleX -= 7
+            }
 
             this.ballX += this.directX
             this.ballY -= this.directY
+
             requestAnimationFrame(this.draw)
         }
 
@@ -102,7 +195,7 @@
         paddleColor: "#e27575",
         fontColor: "#f2bb16",
         brickStartColor: "#f29f05",
-        brickEndColor: "#80458f",
+        brickEndColor: "#f37712",
         brickRow: 3,
         brickCol: 5,
         brickWidth: 75,
