@@ -1,0 +1,43 @@
+body{
+    background-color: #4cb799;
+}
+
+.timer_wrap{
+    background-color: #fff;
+    width: 500px;
+    border-radius: 10px;
+    box-shadow: 10px 13px 0 #289778;
+    padding:40px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.timer{
+    text-align: center;
+    font-size: 48px;
+    font-weight: 900;
+}
+
+.buttons{
+    display: flex;
+    justify-content: center;
+    margin-top: 24px;
+}
+
+.timer_button{
+    width: 33.3%;
+    height: 40px;
+    margin:0 8px;
+    border-radius: 8px;
+    font-size: 16px;
+    text-transform: uppercase;
+    cursor: pointer;
+    text-shadow: 2px 2px 0 #FFF;
+}
+
+.timer_button:active{
+    box-shadow: inset 1px 1px 2px #BABECC, inset -1px -1px 2px #FFF;
+    font-size: 15px;
+}
