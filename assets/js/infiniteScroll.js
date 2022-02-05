@@ -8,7 +8,7 @@
     let page = 1
     const limit = 10
     const $posts = get('.posts')
-    const end = 100
+    const end = 200
     let total = 10
 
     const $loader = get('.loader')
