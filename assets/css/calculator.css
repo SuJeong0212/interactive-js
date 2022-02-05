@@ -33,10 +33,23 @@ table{
     background-color: #5f636a;
 }
 
+.cell_button:active{
+    background-color: #7f8187;
+}
+
 .all_clear, .clear{
     background-color: #434850;
 }
 
 .operation, .compute{
     background-color: #ff9f0a;
+}
+
+.operation:active, .compute:active{
+    background-color: #ffbc54;
+}
+
+.active{
+    border:1px solid #1f232a;
+    background-color: #ffb645;
 }
