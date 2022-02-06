@@ -15,7 +15,7 @@
             this.canvas.setAttribute('width', 480)
             this.canvas.setAttribute('height', 340)
             this.ctx = this.canvas.getContext('2d')
-            this.fontFamily = "25px -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;"
+            this.fontFamily = "12px -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif"
             this.score = 0
             this.lives = data.lives
             this.speed = data.speed
@@ -148,11 +148,11 @@
             this.ctx.fillText('점수 : ' + this.score, 10, 25)
         }
 
-        drawLives = () => {
-            this.ctx.font = this.fontFamily
-            this.ctx.fillStyle = '#ffffff'
-            this.ctx.fillText('목숨 : ' + this.lives, this.canvas.width - 40, 25)
-        }
+        // drawLives = () => {
+        //     this.ctx.font = this.fontFamily
+        //     this.ctx.fillStyle = '#ffffff'
+        //     this.ctx.fillText('목숨 : ' + this.lives, this.canvas.width - 50, 25)
+        // }
 
         detectCollision = () => {
             let currentBrick = {}
@@ -173,8 +173,11 @@
                         if(this.score !== this.brickCol * this.brickRow){
                             continue;
                         }
-                        alert('승리했습니다!')
-                        this.reset()
+                        if(this.score == 15){
+                            alert('YOU WIN!')
+                            this.ctx.fillText(' YOU WIN ',this.canvas.width/2-20, this.canvas.height/2+20)
+                            this.reset(true)
+                        }
                     }
                 }
             }
@@ -193,7 +196,7 @@
             this.drawPaddle()
             this.drawBricks()
             this.drawScore()
-            this.drawLives()
+            // this.drawLives()
             this.detectCollision()
 
             //공이 벽에 닿을 때 튕겨나가게 하기
@@ -210,8 +213,12 @@
                 } else {
                     this.lives--
                     if (0 === this.lives) {
-                            alert('실패하였습니다.')
-                            this.reset()
+                        this.ctx.font = this.fontFamily
+                        this.ctx.fillText(' GAME OVER ',this.canvas.width/2-30, this.canvas.height/2+20)
+                        alert('GAME OVER!')
+                            // document.querySelector('.gameBtn').style.opacity = '1'
+                            // return
+                            this.reset(true)
                     } else {
                         this.ballX = this.canvas.width / 2
                         this.ballY = this.canvas.height - this.paddleHeight
@@ -236,11 +243,12 @@
 
         reset = () => {
             document.location.reload()
+            // document.querySelector('.gameBtn').style.opacity = '1'
         }
     }
 
     const data = {
-        lives: 5,
+        lives: 1,
         speed: 2,
         paddleHeight: 10,
         paddleWidth: 75,
@@ -263,8 +271,9 @@
     // brickBreak.init()
 
     //클릭 시 나타나는 게임창
-    document.querySelector('main').addEventListener('click', function(e){
-        console.log(22);
+    document.querySelector('.gameBtn').addEventListener('click', function(e){
             brickBreak.init()
+            this.style.opacity = '0'
     })
+
 })()
