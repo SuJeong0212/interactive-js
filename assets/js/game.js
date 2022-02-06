@@ -260,5 +260,11 @@
     }
 
     const brickBreak = new BrickBreak('.canvas', data)
-    brickBreak.init()
+    // brickBreak.init()
+
+    //클릭 시 나타나는 게임창
+    document.querySelector('main').addEventListener('click', function(e){
+        console.log(22);
+            brickBreak.init()
+    })
 })()
